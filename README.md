@@ -30,7 +30,7 @@ MMGRec: Multimodal Generative Recommendation with Transformer Model
   ...
   ```
 
-  File model_test.py should be executed after the training process, and the performance of MetaMMF_GCN will be printed:
+  File model_test.py should be executed after the training process, and the performance of MMGRec will be printed:
   
   ```
   R@10: 0.2804; NDCG@10: 0.1898
