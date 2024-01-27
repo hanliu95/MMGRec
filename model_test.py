@@ -21,9 +21,7 @@ test_matrix = test_matrix.toarray()  # the 0-1 matrix of testing set
 item_ids = np.array(list(range(item_num)))
 item_matrix = np.load('tgt_mtx.npy')
 
-P = 0
 R = 0
-HR = 0
 NDCG = 0
 eva_size = 10
 
@@ -55,13 +53,9 @@ for user_id, row in enumerate(test_matrix):
         if (beam == test_ids).all(-1).any():
             hit_num = hit_num + 1
             dcg = dcg + 1 / math.log(i + 2, 2)
-    P += hit_num / eva_size
     R += hit_num / np.sum(row)
-    HR += hit_num
     NDCG += dcg / IDCG(np.sum(descend_sort(row)[0:eva_size]))
 
-P = P/(user_num - null_user)
 R = R/(user_num - null_user)
-HR = HR/np.sum(test_matrix)
 NDCG = NDCG/(user_num - null_user)
-print('P@%d: %.4f; R@%d: %.4f; HR@%d: %.4f; NDCG@%d: %.4f' % (eva_size, P, eva_size, R, eva_size, HR, eva_size, NDCG))
+print('R@%d: %.4f; NDCG@%d: %.4f' % (eva_size, R, eva_size, NDCG))
