@@ -157,16 +157,13 @@ class MultiHeadAttention(nn.Module):
         # (B, S, D) -proj-> (B, S, D_new) -split-> (B, S, H, W) -trans-> (B, H, S, W)
         Q = self.W_Q(input_Q).view(batch_size, -1, n_heads, d_k).transpose(1, 2)  # Q: [batch_size, n_heads, len_q, d_k]
         K = self.W_K(input_K).view(batch_size, -1, n_heads, d_k).transpose(1, 2)  # K: [batch_size, n_heads, len_k, d_k]
-        V = self.W_V(input_V).view(batch_size, -1, n_heads, d_v).transpose(1,
-                                                                           2)  # V: [batch_size, n_heads, len_v(=len_k), d_v]
+        V = self.W_V(input_V).view(batch_size, -1, n_heads, d_v).transpose(1, 2)  # V: [batch_size, n_heads, len_v(=len_k), d_v]
 
-        attn_mask = attn_mask.unsqueeze(1).repeat(1, n_heads, 1,
-                                                  1)  # attn_mask : [batch_size, n_heads, seq_len, seq_len]
+        attn_mask = attn_mask.unsqueeze(1).repeat(1, n_heads, 1, 1)  # attn_mask : [batch_size, n_heads, seq_len, seq_len]
 
         # context: [batch_size, n_heads, len_q, d_v], attn: [batch_size, n_heads, len_q, len_k]
         context, attn = ScaledDotProductAttention()(Q, K, V, attn_mask)
-        context = context.transpose(1, 2).reshape(batch_size, -1,
-                                                  n_heads * d_v)  # context: [batch_size, len_q, n_heads * d_v]
+        context = context.transpose(1, 2).reshape(batch_size, -1, n_heads * d_v)  # context: [batch_size, len_q, n_heads * d_v]
         output = self.fc(context)  # [batch_size, len_q, d_model]
         output = self.dropout(output)
         return nn.LayerNorm(d_model).cuda()(output + residual), attn
@@ -304,8 +301,7 @@ class Decoder(nn.Module):
         dec_self_attns, dec_enc_attns = [], []
         for layer in self.layers:
             # dec_outputs: [batch_size, tgt_len, d_model], dec_self_attn: [batch_size, n_heads, tgt_len, tgt_len], dec_enc_attn: [batch_size, h_heads, tgt_len, src_len]
-            dec_outputs, dec_self_attn, dec_enc_attn = layer(dec_outputs, enc_outputs, dec_self_attn_mask,
-                                                             dec_enc_attn_mask)
+            dec_outputs, dec_self_attn, dec_enc_attn = layer(dec_outputs, enc_outputs, dec_self_attn_mask, dec_enc_attn_mask)
             dec_self_attns.append(dec_self_attn)
             dec_enc_attns.append(dec_enc_attn)
         return dec_outputs, dec_self_attns, dec_enc_attns
