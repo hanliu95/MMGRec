@@ -10,28 +10,30 @@ MMGRec: Multimodal Generative Recommendation with Transformer Model
 * Numpy 1.19.5
 
 ## File specification
+* src_input.py : obtains the historical interaction history of users.
+* tgt_input.py : obtains the Rec-IDs of items.
 * model_train.py : the training process of MMGRec.
 * model_test.py : the testing process of MMGRec.
 
 ## Usage
 * Execution sequence
 
-  The execution sequence of codes is as follows: model_train.py--->model_test.py
+  The execution sequence of codes is as follows: src_input.py--->tgt_input.py--->model_train.py--->model_test.py
   
 * Execution results
 
   During the execution of file model_train.py, the epoch and training loss will be printed as the training process:
   
   ```
-  Epoch: 0001 loss = 4.690832
-  Epoch: 0002 loss = 3.858034
-  Epoch: 0003 loss = 3.622033
-  Epoch: 0004 loss = 3.485817
+  Epoch: 0001 loss = 4.164487
+  Epoch: 0002 loss = 3.460217
+  Epoch: 0003 loss = 3.060792
+  Epoch: 0004 loss = 2.914330
   ...
   ```
 
   File model_test.py should be executed after the training process, and the performance of MMGRec will be printed:
   
   ```
-  R@10: 0.2804; NDCG@10: 0.1898
+  R@10: 0.1269; NDCG@10: 0.0802
   ```
