@@ -10,7 +10,7 @@ MMGRec: Multimodal Generative Recommendation with Transformer Model
 * Numpy 1.19.5
 
 ## File specification
-* src_input.py : obtains the historical interaction history of users.
+* src_input.py : obtains the historical interaction sequences of users.
 * tgt_input.py : obtains the Rec-IDs of items.
 * model_train.py : the training process of MMGRec.
 * model_test.py : the testing process of MMGRec.
