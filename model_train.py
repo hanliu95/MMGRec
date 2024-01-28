@@ -416,9 +416,3 @@ with open('result.pkl', 'wb') as file:
     pickle.dump(para, file)
 
 print('ending!')
-
-
-
-
-
-
