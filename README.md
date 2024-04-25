@@ -10,6 +10,8 @@ MMGRec: Multimodal Generative Recommendation with Transformer Model
 * Numpy 1.19.5
 
 ## File specification
+* data_load.py : loads the raw data.
+* data_triple.py : obtains the triplets for model training.
 * src_input.py : obtains the historical interaction sequences of users.
 * tgt_input.py : obtains the Rec-IDs of items.
 * model_train.py : the training process of MMGRec.
@@ -18,7 +20,7 @@ MMGRec: Multimodal Generative Recommendation with Transformer Model
 ## Usage
 * Execution sequence
 
-  The execution sequence of codes is as follows: src_input.py--->tgt_input.py--->model_train.py--->model_test.py
+  The execution sequence of codes is as follows: data_load.py--->data_triple.py--->src_input.py--->tgt_input.py--->model_train.py--->model_test.py
   
 * Execution results
 
