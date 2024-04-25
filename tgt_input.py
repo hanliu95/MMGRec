@@ -43,9 +43,9 @@ print('total number of items is ', item_num)
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
-v_f_lookup = np.load('v_f.npy')  # size=(item_num, 128)
-a_f_lookup = np.load('a_f.npy')
-t_f_lookup = np.load('t_f.npy')
+v_f_lookup = np.load('v_feat_sample.npy')  # size=(item_num, 128)
+a_f_lookup = np.load('a_feat_sample.npy')
+t_f_lookup = np.load('t_feat_sample.npy')
 f_lookup = torch.from_numpy(np.concatenate((v_f_lookup, a_f_lookup, t_f_lookup), axis=1)).float().to(device)
 
 batch_size = 3000
