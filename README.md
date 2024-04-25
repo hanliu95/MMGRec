@@ -11,7 +11,7 @@ MMGRec: Multimodal Generative Recommendation with Transformer Model
 
 ## File specification
 * data_load.py : loads the raw data.
-* data_triple.py : obtains the triplets for model training.
+* data_triple.py : processes the data further.
 * src_input.py : obtains the historical interaction sequences of users.
 * tgt_input.py : obtains the Rec-IDs of items.
 * model_train.py : the training process of MMGRec.
