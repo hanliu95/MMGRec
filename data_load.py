@@ -20,7 +20,7 @@ for k in range(USER_NUM):
     whole_set = list(whole_dict[k])
     train_set = random.sample(whole_set, round(0.8 * len(whole_set)))
     test_val_set = list(set(whole_set) - set(train_set))
-    test_set = random.sample(test_set, math.ceil(0.5 * len(test_set)))
+    test_set = random.sample(test_val_set, math.ceil(0.5 * len(test_set)))
     val_set = list(set(test_val_set) - set(test_set))
     for i in train_set:
         train_ui = np.append(train_ui, [[k, i]], axis=0)
